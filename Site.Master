@@ -1,0 +1,237 @@
+﻿
+<%@ Master Language="C#" AutoEventWireup="true"
+    CodeBehind="Site.master.cs"
+    Inherits="Lifelink.SiteMaster" %>
+
+<!DOCTYPE html>
+<html lang="en">
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title><%: Page.Title %> - LifeLink</title>
+
+    <link href="~/CSS/style.css"
+          rel="stylesheet"
+          runat="server" />
+
+    <style>
+        .site-header .header-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .site-header .logo {
+            flex-shrink: 0;
+        }
+
+        .site-header .main-nav {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 26px;
+            flex: 1;
+            min-width: 0;
+        }
+
+        .site-header .nav-account {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 18px;
+            margin-left: 20px;
+            margin-right: 0;
+            padding-left: 24px;
+            border-left: 1px solid #DCE6F5;
+            flex-shrink: 0;
+        }
+
+        .site-header .profile-icon {
+            width: 42px;
+            height: 42px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            box-sizing: border-box;
+            border: 1px solid #DCE6F5;
+            border-radius: 50%;
+            background: #EFF4FF;
+            color: #204077;
+            text-decoration: none;
+            flex-shrink: 0;
+        }
+
+        .site-header .profile-icon:hover {
+            background: #0066D9;
+            color: #FFFFFF;
+        }
+
+        .site-header .profile-icon svg {
+            width: 23px;
+            height: 23px;
+        }
+
+        .site-header .nav-logout {
+            color: #204077;
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+
+        .site-header .nav-logout:hover {
+            color: #0066D9;
+        }
+
+        @media (max-width: 1100px) {
+            .site-header .header-container {
+                flex-wrap: wrap;
+            }
+
+            .site-header .main-nav {
+                flex-wrap: wrap;
+                gap: 16px 22px;
+            }
+
+            .site-header .nav-account {
+                margin-left: auto;
+                padding-left: 16px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .site-header .main-nav {
+                gap: 14px;
+            }
+
+            .site-header .nav-account {
+                margin-left: 0;
+                padding-left: 12px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <form id="form1" runat="server">
+
+        <!-- HEADER -->
+        <header class="site-header">
+            <div class="header-container">
+
+                <!-- LOGO -->
+                <a href="~/Home.aspx"
+                   runat="server"
+                   class="logo">
+                    Life<span>Link</span>
+                </a>
+
+                <!-- NAVIGATION -->
+                <nav class="main-nav">
+
+                    <a href="~/Home.aspx" runat="server">Home</a>
+                    <a href="~/About.aspx" runat="server">About</a>
+                    <a href="~/Services.aspx" runat="server">Services</a>
+                    <a href="~/FindHelp.aspx" runat="server">Find Help</a>
+                    <a href="~/Volunteer.aspx" runat="server">Volunteer</a>
+                    <a href="~/Contact.aspx" runat="server">Contact</a>
+                    <a href="~/Feedback.aspx" runat="server">Feedback</a>
+
+                    <!-- BEFORE LOGIN -->
+                    <asp:Panel
+                        ID="pnlGuest"
+                        runat="server"
+                        CssClass="nav-account">
+
+                        <a href="~/Login.aspx"
+                           runat="server"
+                           class="login-button">
+                            Login
+                        </a>
+
+                    </asp:Panel>
+
+                    <!-- AFTER LOGIN -->
+                    <asp:Panel
+                        ID="pnlUser"
+                        runat="server"
+                        CssClass="nav-account"
+                        Visible="false">
+
+                        <!-- LOGOUT -->
+                        <asp:LinkButton
+                            ID="btnLogout"
+                            runat="server"
+                            CssClass="nav-logout"
+                            CausesValidation="false"
+                            OnClick="btnLogout_Click">
+                            Logout
+                        </asp:LinkButton>
+
+                        <!-- PROFILE ICON AT RIGHT -->
+                        <a href="~/Profile.aspx"
+                           runat="server"
+                           class="profile-icon"
+                           title="My Profile"
+                           aria-label="My Profile">
+
+                            <svg viewBox="0 0 24 24"
+                                 fill="none"
+                                 stroke="currentColor"
+                                 stroke-width="2"
+                                 stroke-linecap="round"
+                                 stroke-linejoin="round"
+                                 aria-hidden="true">
+
+                                <circle cx="12" cy="8" r="4"></circle>
+                                <path d="M4 21a8 8 0 0 1 16 0"></path>
+
+                            </svg>
+                        </a>
+
+                    </asp:Panel>
+
+                </nav>
+            </div>
+        </header>
+
+        <!-- MAIN CONTENT -->
+        <main>
+            <asp:ContentPlaceHolder
+                ID="MainContent"
+                runat="server">
+            </asp:ContentPlaceHolder>
+        </main>
+
+        <!-- FOOTER -->
+        <footer class="site-footer">
+            <div class="footer-container">
+
+                <div class="footer-brand">
+                    Life<span>Link</span>
+                </div>
+
+                <p>Connecting People • Creating Hope</p>
+
+                <div class="footer-links">
+                    <a href="~/About.aspx" runat="server">About</a>
+                    <a href="~/Services.aspx" runat="server">Services</a>
+                    <a href="~/Contact.aspx" runat="server">Contact</a>
+                    <a href="~/Feedback.aspx" runat="server">Feedback</a>
+                </div>
+
+                <p class="copyright">
+                    © <%: DateTime.Now.Year %>
+                    LifeLink. All Rights Reserved.
+                </p>
+
+            </div>
+        </footer>
+
+    </form>
+</body>
+</html>

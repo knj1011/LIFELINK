@@ -1,0 +1,220 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Admin.master.cs" Inherits="Lifelink.Admin.Admin" %>
+
+<!DOCTYPE html>
+<html>
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>LifeLink Admin Panel</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #F8F9FF;
+            color: #1E1E1E;
+        }
+
+        .admin-sidebar {
+            width: 250px;
+            height: 100vh;
+            background: #204077;
+            color: #FFFFFF;
+            position: fixed;
+            top: 0;
+            left: 0;
+            padding: 25px 16px;
+            overflow-y: auto;
+        }
+
+        .admin-logo {
+            font-size: 26px;
+            font-weight: bold;
+            padding: 0 12px 5px;
+        }
+
+        .admin-subtitle {
+            font-size: 11px;
+            letter-spacing: 2px;
+            color: #DCE6F5;
+            padding: 0 12px 28px;
+        }
+
+        .sidebar-heading {
+            font-size: 11px;
+            color: #B9CBE8;
+            padding: 0 12px 12px;
+            letter-spacing: 1.5px;
+        }
+
+        .sidebar-menu {
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+        }
+
+        .sidebar-menu a {
+            display: block;
+            color: #FFFFFF;
+            text-decoration: none;
+            padding: 13px 14px;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: background 0.2s;
+        }
+
+        .sidebar-menu a:hover {
+            background: #31558A;
+        }
+
+        .sidebar-menu a.active {
+            background: #0066D9;
+            font-weight: bold;
+        }
+
+        /* Logout button styling */
+        .sidebar-menu .logout-link {
+            display: block;
+            width: 100%;
+            color: #FFFFFF;
+            background: transparent;
+            border: none;
+            text-decoration: none;
+            text-align: left;
+            padding: 13px 14px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: Arial, sans-serif;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .sidebar-menu .logout-link:hover {
+            background: #31558A;
+        }
+
+        .admin-main {
+            margin-left: 250px;
+            padding: 30px;
+            min-height: 100vh;
+        }
+
+        .admin-topbar {
+            background: #FFFFFF;
+            border: 1px solid #DCE6F5;
+            border-radius: 12px;
+            padding: 18px 22px;
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .admin-topbar h2 {
+            margin: 0;
+            color: #204077;
+            font-size: 22px;
+        }
+
+        .admin-welcome {
+            color: #6B7280;
+            font-size: 13px;
+        }
+
+        @media (max-width: 768px) {
+            .admin-sidebar {
+                width: 200px;
+            }
+
+            .admin-main {
+                margin-left: 200px;
+                padding: 16px;
+            }
+
+            .admin-topbar {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .admin-sidebar {
+                width: 155px;
+                padding: 20px 8px;
+            }
+
+            .admin-logo {
+                font-size: 21px;
+                padding-left: 8px;
+            }
+
+            .admin-subtitle {
+                font-size: 9px;
+                padding-left: 8px;
+            }
+
+            .sidebar-menu a,
+            .sidebar-menu .logout-link {
+                padding: 12px 8px;
+                font-size: 12px;
+            }
+
+            .admin-main {
+                margin-left: 155px;
+                padding: 10px;
+            }
+        }
+    </style>
+
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+
+<body>
+    <form id="form1" runat="server">
+
+        <aside class="admin-sidebar">
+            <div class="admin-logo">♥ LifeLink</div>
+            <div class="admin-subtitle">ADMIN PANEL</div>
+
+            <div class="sidebar-heading">MAIN MENU</div>
+
+            <nav class="sidebar-menu">
+                <a href="Dashboard.aspx">▦ Dashboard</a>
+                <a href="Users.aspx">♙ Users</a>
+                <a href="Donors.aspx">♥ Donors</a>
+                <a href="Requests.aspx">▤ Requests</a>
+                <a href="Volunteers.aspx">♧ Volunteers</a>
+                <a href="Feedback.aspx">✉ Feedback</a>
+                <a href="AdminProfile.aspx">♙ Admin Profile</a>
+
+                <asp:LinkButton
+                    ID="btnLogout"
+                    runat="server"
+                    CssClass="logout-link"
+                    OnClick="btnLogout_Click"
+                    CausesValidation="false">
+                    ↪ Logout
+                </asp:LinkButton>
+            </nav>
+        </aside>
+
+        <main class="admin-main">
+            <header class="admin-topbar">
+                <h2>LifeLink Administration</h2>
+                <span class="admin-welcome">Welcome, Admin</span>
+            </header>
+
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+        </main>
+
+    </form>
+</body>
+</html>
+
